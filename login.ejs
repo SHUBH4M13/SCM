@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logistics Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f4fc, #e6f2ff);
+            background-size: 400% 400%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            animation: gradientFlow 15s ease infinite;
+        }
+
+        /* Background Animations */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatIcon {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Background Icons */
+        .background-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: #3B82F6;
+            opacity: 0.3;
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.2), 
+                        0 15px 30px rgba(0, 123, 255, 0.15),
+                        0 10px 20px rgba(0, 123, 255, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Header */
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-header h1 {
+            color: #3B82F6;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-header .truck-icon {
+            margin-right: 15px;
+            color: #3B82F6;
+        }
+
+        .login-header p {
+            color: #6B7280;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Form Styles */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4B5563;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            margin-right: 10px;
+            color: #3B82F6;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Button Styles */
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #3B82F6, #2563EB);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #2563EB, #1E40AF);
+        }
+
+        /* Forgot Password */
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #3B82F6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #2563EB;
+        }
+
+        /* Footer */
+        .login-footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #6B7280;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Icons -->
+    <div class="background-icons">
+        <i class="fas fa-truck floating-icon" style="top: 10%; left: 5%; font-size: 4rem; animation: floatIcon 5s infinite, rotate 20s linear infinite;"></i>
+        <i class="fas fa-box floating-icon" style="top: 80%; right: 10%; font-size: 3rem; animation: floatIcon 6s infinite;"></i>
+        <i class="fas fa-shipping-fast floating-icon" style="top: 30%; right: 5%; font-size: 5rem; animation: floatIcon 4s infinite, rotate 15s linear infinite;"></i>
+        <i class="fas fa-warehouse floating-icon" style="bottom: 20%; left: 15%; font-size: 4rem; animation: floatIcon 7s infinite;"></i>
+        <i class="fas fa-globe floating-icon" style="top: 50%; left: 80%; font-size: 3rem; animation: floatIcon 5s infinite, rotate 25s linear infinite;"></i>
+    </div>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1>
+                <i class="fas fa-truck-moving truck-icon"></i>
+                Logistics Portal
+            </h1>
+            <p>Streamline Your Supply Chain</p>
+        </div>
+
+        <form class="login-form" action="/" method="POST">
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i>Phone No.
+                </label>
+                <input 
+                    type="tel" 
+                    id="number" 
+                    name="number" 
+                    placeholder="Enter your Phone No." 
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i>Password
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password" 
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+
+            <div class="forgot-password">
+                <a href="/forgot-password">
+                    <i class="fas fa-key"></i> Forgot Password?
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

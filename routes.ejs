@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routes Management - Supply Chain Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .table-hover:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white shadow-lg rounded-lg p-8 mb-8">
+                <h1 class="text-3xl font-bold mb-6 text-blue-600">
+                    <i class="fas fa-route mr-3"></i>Add Route
+                </h1>
+                
+                <form action="/routes" method="POST" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Source Node</label>
+                        <select 
+                            name="source_node" 
+                            required 
+                            class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Source Node</option>
+                            <% nodes.forEach(function(node) { %>
+                                <option><%= node.n_name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Destination Node</label>
+                        <select 
+                            name="destination_node" 
+                            required 
+                            class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="">Select Destination Node</option>
+                            <% nodes.forEach(function(node) { %>
+                                <option><%= node.n_name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Route Weight (Distance/Cost)</label>
+                        <input 
+                            type="number" 
+                            name="weight" 
+                            required 
+                            step="0.01"
+                            class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter Route Weight"
+                        >
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-101"
+                    >
+                        <i class="fas fa-save mr-3"></i>Add Route
+                    </button>
+                </form>
+            </div>
+
+            <!-- View Routes Table -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="bg-blue-100 p-4 flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600 flex-grow">
+                        <i class="fas fa-road mr-3"></i>View Routes
+                    </h1>
+                </div>
+    
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-blue-50 border-b">
+                            <tr>
+                                <th class="p-3 text-left text-blue-600 font-semibold">Route ID</th>
+                                <th class="p-3 text-left text-blue-600 font-semibold">Source Node</th>
+                                <th class="p-3 text-left text-blue-600 font-semibold">Destination Node</th>
+                                <th class="p-3 text-left text-blue-600 font-semibold">Weight (km)</th>
+                                <th class="p-3 text-left text-blue-600 font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (routes && routes.length > 0) { %>
+                                <% routes.forEach(function(route) { %>
+                                    <tr class="border-b table-hover">
+                                        <td class="p-3 text-gray-700"><%= route.r_id %></td>
+                                        <td class="p-3 text-gray-700"><%= route.r_Source %></td>
+                                        <td class="p-3 text-gray-700"><%= route.r_Destination %></td>
+                                        <td class="p-3 text-gray-700"><%= route.r_weight %></td>
+                                        <td class="p-3">
+                                            <div class="flex space-x-2">
+                                                <button class="text-blue-500 hover:text-blue-700 mr-2">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-500 hover:text-red-700">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5" class="text-center p-6 text-gray-500">
+                                        <i class="fas fa-info-circle mr-2"></i>
+                                        No routes found. Add a new route to get started.
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
